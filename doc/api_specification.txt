@@ -1,0 +1,126 @@
+To start or continue a game, you must receive the game's state.  To receive the state of a game or to start a new game, perform a get request on the API.
+
+Request:
+GET /api?identifier=<hardware address>
+
+Headers:
+Content-Type: application/json
+Authentication-Key: <API_KEY>
+
+Response:
+{
+        "game_in_progress":true|false,
+        "player_color":"black|white",
+        "is_current_players_turn":true|false,
+        "is_game_over":true|false,
+        "winner":"black|white",
+        "game_state": { 
+                 "black": {
+                          "pawn1":"",
+                          "pawn2":"",
+                          "pawn3":"",
+                          "pawn4":"",
+                          "pawn5":"",
+                          "pawn6":"",
+                          "pawn7":"",
+                          "pawn8":"",
+                          "rook1":"",
+                          "rook2":"",
+                          "knight1":"",
+                          "knight2":"",
+                          "bishop1":"",
+                          "bishop2":"",
+                          "queen":"",
+                          "king":""
+                 },
+                 "white": {
+                          "pawn1":"",
+                          "pawn2":"",
+                          "pawn3":"",
+                          "pawn4":"",
+                          "pawn5":"",
+                          "pawn6":"",
+                          "pawn7":"",
+                          "pawn8":"",
+                          "rook1":"",
+                          "rook2":"",
+                          "knight1":"",
+                          "knight2":"",
+                          "bishop1":"",
+                          "bishop2":"",
+                          "queen":"",
+                          "king":""                 
+                 }
+        }
+}
+
+To make a move and alter the game's state, perform a put request on the api.
+
+Request:
+PUT /api?identifier=<hardware address>
+
+Headers:
+Content-Type: application/json
+Authentication-Key: <API_KEY>
+
+Body:
+{
+       "game_state": { 
+                 "black": {
+                          "pawn1":"",
+                          "pawn2":"",
+                          "pawn3":"",
+                          "pawn4":"",
+                          "pawn5":"",
+                          "pawn6":"",
+                          "pawn7":"",
+                          "pawn8":"",
+                          "rook1":"",
+                          "rook2":"",
+                          "knight1":"",
+                          "knight2":"",
+                          "bishop1":"",
+                          "bishop2":"",
+                          "queen":"",
+                          "king":""
+                 },
+                 "white": {
+                          "pawn1":"",
+                          "pawn2":"",
+                          "pawn3":"",
+                          "pawn4":"",
+                          "pawn5":"",
+                          "pawn6":"",
+                          "pawn7":"",
+                          "pawn8":"",
+                          "rook1":"",
+                          "rook2":"",
+                          "knight1":"",
+                          "knight2":"",
+                          "bishop1":"",
+                          "bishop2":"",
+                          "queen":"",
+                          "king":""                 
+                 }
+        }
+}
+
+Response:
+{
+        "success":true|false
+}
+
+To resign perform a delete request on the API.
+
+Request:
+DELETE /api?identifier=<hardware address>
+
+Headers:
+Content-Type: application/json
+Authentication-Key: <API_KEY>
+
+Response:
+
+{
+        "success":true|false
+}

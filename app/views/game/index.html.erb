@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row well">
+    <div class="down-50">
+      <table class="table table-striped">
+        <thead>
+          <th>
+            Edit
+          </th>
+          <th>
+            In Progress?
+          </th>
+          <th>
+            Started On
+          </th>
+          <th>
+            Last Move On
+          </th>
+          <th>
+            Delete Game
+          </th>
+        </thead>
+        <% @games.each do |game| %>
+          <% if game.updated_at < 7.days.ago %>
+            <tr class="error">
+          <% else %>
+            <tr>
+          <% end %>
+            <td>
+              <a href="/game/<%= game.id %>" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+              <%= game.game_in_progress %>
+            </td>
+            <td>
+              <%= game.created_at %>
+            </td>
+            <td>
+              <%= game.updated_at %>
+            </td>
+            <td>
+              <%= form_for game, :method => :delete do  %>   
+                <input type="submit" class="btn btn-danger" value="Delete" />
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

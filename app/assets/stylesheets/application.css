@@ -10,4 +10,42 @@
  *
  *= require_self
  *= require_tree .
+ *= require bootstrap-responsive
+ *= require bootstrap
  */
+
+html, body {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-image: url('background.png');
+}
+
+.center {
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.padding-0 {
+    padding: 0;
+}
+
+.down-50 {
+    margin-top: 50px;
+}
+
+.login-span {
+    width: 246px;
+}

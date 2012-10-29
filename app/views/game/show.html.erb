@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row well">
+    <div class="down-50">
+      <%= form_for @game, :method => :put do  %>   
+        <div class="span3 well">
+          <% if @game.game_in_progress %>
+            <h3>Current Turn</h3>
+          <% else %>
+            <h3>Winner</h3>
+          <% end %>
+          <% if @game.current_player == 'white' %>
+            <label class="btn disabled">White</label>
+          <% else %>
+            <label class="btn btn-inverse disabled">Black</label>
+          <% end %>
+        </div>
+        <div class="span3 well">
+          <h3>White Player Id</h3>
+          <label class="btn btn-info disabled"><%= @game.white_player_id %></label>
+        </div>
+        <div class="span3 well">
+          <h3>Black Player Id</h3>
+          <% if @game.game_in_progress and @game.black_player_id != nil %>
+            <label class="btn btn-info disabled"><%= @game.black_player_id %></label>
+          <% else %>
+            <input type="submit" class="btn btn-primary" value="Simulate Black Player" />
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

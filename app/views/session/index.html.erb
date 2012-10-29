@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="offset4 span4">
+      <div class="well down-50">
+        <% if flash[:error] %>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <%= flash[:error] %>
+          </div>
+        <% end %>
+        <% if flash[:notice] %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        <form class="form" method="post" action="login">
+          <fieldset>
+            <legend>Login to Synchro</legend>
+            <div class="control-group">
+              <label class="control-label" for="username">Username:</label>
+              <div class="controls">
+                <input name="username" placeholder="me@mysite.com" type="text" class="login-span" id="username" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="id_password">Password:</label>
+              <div class="controls">
+                <input name="password" placeholder="my password" type="password" class="login-span" id="password" />
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <input type="submit" value="Login" class="btn btn-primary float-right" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
