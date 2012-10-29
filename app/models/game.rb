@@ -230,6 +230,7 @@ class Game < ActiveRecord::Base
      player_color: (player_id == self.white_player ? "white" : "black"),
      is_current_players_turn: ((player_id == self.white_player && current_player == "white") || (player_id != self.white_player && current_player == "black") ? true : false),
      is_game_over: (self.white_king_x == nil || self.black_king_x == nil ? true : false),
+     current_player: self.current_player,
      winner: (self.white_king_x == nil ? "black" : "white"),
      game_state: {
                   white: {

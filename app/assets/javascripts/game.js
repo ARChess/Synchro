@@ -1,6 +1,7 @@
 var clickedOnce = 0;
 var selectedPieceX = -1, selectedPieceY = -1;
 var toSpaceX = -1, toSpaceY = -1;
+var currentPlayer = "";
 
 function clickPiece(x, y, enabled, isWhite) {
     if(enabled == true) {
@@ -116,5 +117,28 @@ function submit(pieces, id) {
         }
     });
 }
+
+window.setInterval(function() {
+    $.ajax({
+        beforeSend: function(xhrObj){
+            xhrObj.setRequestHeader("API_KEY","traprubepreyed2ebupucramunumus4ebewruyUdraga36pacrujavuKep8afref");
+        },
+        url: "/api?identifier=Synchro-" + id,
+        type: "GET",
+        contentType: "application/json",
+        data: data,
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert(errorThrown);
+        }, 
+        success: function(data, textStatus, XMLHttpRequest){
+            data = JSON.parse(data);
+            if(currentPlayer == "") {
+                currentPlayer = data["current_player"];
+            } else if(data["current_player"] != currentPlayer) {
+                document.location.reload(true);
+            }
+        }
+    });
+},6000);
 
 
