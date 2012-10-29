@@ -12,6 +12,7 @@ Response:
         "game_in_progress":true|false,
         "player_color":"black|white",
         "is_current_players_turn":true|false,
+        "current_player":"white|black",
         "is_game_over":true|false,
         "winner":"black|white",
         "game_state": { 
