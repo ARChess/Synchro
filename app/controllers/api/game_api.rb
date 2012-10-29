@@ -24,19 +24,27 @@ module Api
     end
     
     get '/' do
-
+      Game.find_game(params["identifier"]).to_json
     end
 
     put '/' do
-
+      request.body.rewind
+      game_state = JSON.parse(request.body.read)
+      game = Game.find_game(params["identifier"])
+      game.set_state(game_state)
+      game.change_player
+      { success: true }.to_json
     end
 
     delete '/' do
-
+      game = Game.find_game(params["identifier"])
+      game.resign(params["identifier"])
+      { success: true }.to_json
     end
 
     after do
       response['Access-Control-Allow-Origin'] = '*'
+      response['Content-Type'] = 'application/json'
     end
   end
 end
