@@ -49,3 +49,15 @@ body {
 .login-span {
     width: 246px;
 }
+
+.light-square {
+    background-color: #DEB887;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.dark-square {
+    background-color: #8B4513;
+    height: 60px;
+    margin-bottom: 20px;
+}

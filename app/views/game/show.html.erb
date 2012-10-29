@@ -27,6 +27,19 @@
           <% end %>
         </div>
       <% end %>
+
+      <div>
+        <legend><%= (@game.current_player == "black" && @game.black_player_id == "Synchro" ? "Make a Move" : "Current Game State") %></legend>
+        <% (0..7).each do |x| %>
+          <div class="row">
+            <div class="offset1">
+              <% (0..7).each do |y| %>
+                <div class="<%= (x % 2 == 0 ? (y % 2 == 0 ? "span1 light-square" : "span1 dark-square") : (y % 2 == 0 ? "span1 dark-square" : "span1 light-square")) %>"></div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
