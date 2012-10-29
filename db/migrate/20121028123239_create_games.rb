@@ -4,8 +4,8 @@ class CreateGames < ActiveRecord::Migration
       t.boolean :game_in_progress
       t.string :current_player
       t.string :winner
-      t.string :white_player_id
-      t.string :black_player_id
+      t.string :white_player
+      t.string :black_player
       t.integer :black_pawn1_x
       t.integer :black_pawn2_x
       t.integer :black_pawn3_x

@@ -2,26 +2,27 @@ require 'json'
 
 class Game < ActiveRecord::Base
   def self.find_game(player_id)
-    game = Game.find_by_white_player_id_and_game_in_progress(player_id, true)
+    game = Game.find_by_white_player_and_game_in_progress(player_id, true)
     if game == nil
-      game = Game.find_by_black_player_id_and_game_in_progress(player_id, true)
+      game = Game.find_by_black_player_and_game_in_progress(player_id, true)
     end
     return game if game != nil
 
-    game = Game.where(:black_player_id => nil, :game_in_progress => true)
+    game = Game.where(:black_player => nil, :game_in_progress => true).first
     if game != nil
-      game.black_player_id = player_id
+      game.black_player = player_id
       game.save!
     else
-      game = Game.new(player_id)
+      game = Game.new
+      game.init(player_id)
     end
     return game
   end
 
-  def initialize(white_player_id)
+  def init(white_player_id)
     self.game_in_progress = true
     self.current_player = "white"
-    self.white_player_id = white_player_id
+    self.white_player = white_player_id
     self.black_pawn1_x = 6
     self.black_pawn2_x = 6
     self.black_pawn3_x = 6
@@ -92,18 +93,18 @@ class Game < ActiveRecord::Base
 
   def set_state(game)
     self.black_pawn1_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn2_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn3_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn4_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn5_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn6_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn7_x = game["game_state"]["black"]["pawn1"]["x"]
-    self.black_pawn8_x = game["game_state"]["black"]["pawn1"]["x"]
+    self.black_pawn2_x = game["game_state"]["black"]["pawn2"]["x"]
+    self.black_pawn3_x = game["game_state"]["black"]["pawn3"]["x"]
+    self.black_pawn4_x = game["game_state"]["black"]["pawn4"]["x"]
+    self.black_pawn5_x = game["game_state"]["black"]["pawn5"]["x"]
+    self.black_pawn6_x = game["game_state"]["black"]["pawn6"]["x"]
+    self.black_pawn7_x = game["game_state"]["black"]["pawn7"]["x"]
+    self.black_pawn8_x = game["game_state"]["black"]["pawn8"]["x"]
     self.black_rook1_x = game["game_state"]["black"]["rook1"]["x"]
     self.black_rook2_x = game["game_state"]["black"]["rook2"]["x"]
     self.black_knight1_x = game["game_state"]["black"]["knight1"]["x"]
     self.black_knight2_x = game["game_state"]["black"]["knight2"]["x"]
-    self.black_bishop1_x = game["game_state"]["black"]["bishop2"]["x"]
+    self.black_bishop1_x = game["game_state"]["black"]["bishop1"]["x"]
     self.black_bishop2_x = game["game_state"]["black"]["bishop2"]["x"]
     self.black_queen_x = game["game_state"]["black"]["queen"]["x"]
     self.black_king_x = game["game_state"]["black"]["king"]["x"]
@@ -124,18 +125,18 @@ class Game < ActiveRecord::Base
     self.white_queen_x = game["game_state"]["white"]["queen"]["x"]
     self.white_king_x = game["game_state"]["white"]["king"]["x"]
     self.black_pawn1_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn2_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn3_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn4_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn5_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn6_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn7_y = game["game_state"]["black"]["pawn1"]["y"]
-    self.black_pawn8_y = game["game_state"]["black"]["pawn1"]["y"]
+    self.black_pawn2_y = game["game_state"]["black"]["pawn2"]["y"]
+    self.black_pawn3_y = game["game_state"]["black"]["pawn3"]["y"]
+    self.black_pawn4_y = game["game_state"]["black"]["pawn4"]["y"]
+    self.black_pawn5_y = game["game_state"]["black"]["pawn5"]["y"]
+    self.black_pawn6_y = game["game_state"]["black"]["pawn6"]["y"]
+    self.black_pawn7_y = game["game_state"]["black"]["pawn7"]["y"]
+    self.black_pawn8_y = game["game_state"]["black"]["pawn8"]["y"]
     self.black_rook1_y = game["game_state"]["black"]["rook1"]["y"]
     self.black_rook2_y = game["game_state"]["black"]["rook2"]["y"]
     self.black_knight1_y = game["game_state"]["black"]["knight1"]["y"]
     self.black_knight2_y = game["game_state"]["black"]["knight2"]["y"]
-    self.black_bishop1_y = game["game_state"]["black"]["bishop2"]["y"]
+    self.black_bishop1_y = game["game_state"]["black"]["bishop1"]["y"]
     self.black_bishop2_y = game["game_state"]["black"]["bishop2"]["y"]
     self.black_queen_y = game["game_state"]["black"]["queen"]["y"]
     self.black_king_y = game["game_state"]["black"]["king"]["y"]
@@ -158,6 +159,55 @@ class Game < ActiveRecord::Base
     self.save!
   end
 
+  def pieces_by_positions
+    pieces = {
+      0 => { },
+      1 => { },
+      2 => { },
+      3 => { },
+      4 => { },
+      5 => { },
+      6 => { },
+      7 => { }
+    }
+    
+    pieces[self.white_pawn1_x][self.white_pawn1_y] = "white_pawn1" if self.white_pawn1_x
+    pieces[self.white_pawn2_x][self.white_pawn2_y] = "white_pawn2" if self.white_pawn2_x
+    pieces[self.white_pawn3_x][self.white_pawn3_y] = "white_pawn3" if self.white_pawn3_x
+    pieces[self.white_pawn4_x][self.white_pawn4_y] = "white_pawn4" if self.white_pawn4_x
+    pieces[self.white_pawn5_x][self.white_pawn5_y] = "white_pawn5" if self.white_pawn5_x
+    pieces[self.white_pawn6_x][self.white_pawn6_y] = "white_pawn6" if self.white_pawn6_x
+    pieces[self.white_pawn7_x][self.white_pawn7_y] = "white_pawn7" if self.white_pawn7_x
+    pieces[self.white_pawn8_x][self.white_pawn8_y] = "white_pawn8" if self.white_pawn8_x
+    pieces[self.white_rook1_x][self.white_rook1_y] = "white_rook1" if self.white_rook1_x
+    pieces[self.white_rook2_x][self.white_rook2_y] = "white_rook2" if self.white_rook2_x
+    pieces[self.white_bishop1_x][self.white_bishop1_y] = "white_bishop1" if self.white_bishop1_x
+    pieces[self.white_bishop2_x][self.white_bishop2_y] = "white_bishop2" if self.white_bishop2_x
+    pieces[self.white_knight1_x][self.white_knight1_y] = "white_knight1" if self.white_knight1_x
+    pieces[self.white_knight2_x][self.white_knight2_y] = "white_knight2" if self.white_knight2_x
+    pieces[self.white_queen_x][self.white_queen_y] = "white_queen" if self.white_queen_x
+    pieces[self.white_king_x][self.white_king_y] = "white_king" if self.white_king_x
+    
+    pieces[self.black_pawn1_x][self.black_pawn1_y] = "black_pawn1" if self.black_pawn1_x
+    pieces[self.black_pawn2_x][self.black_pawn2_y] = "black_pawn2" if self.black_pawn2_x
+    pieces[self.black_pawn3_x][self.black_pawn3_y] = "black_pawn3" if self.black_pawn3_x
+    pieces[self.black_pawn4_x][self.black_pawn4_y] = "black_pawn4" if self.black_pawn4_x
+    pieces[self.black_pawn5_x][self.black_pawn5_y] = "black_pawn5" if self.black_pawn5_x
+    pieces[self.black_pawn6_x][self.black_pawn6_y] = "black_pawn6" if self.black_pawn6_x
+    pieces[self.black_pawn7_x][self.black_pawn7_y] = "black_pawn7" if self.black_pawn7_x
+    pieces[self.black_pawn8_x][self.black_pawn8_y] = "black_pawn8" if self.black_pawn8_x
+    pieces[self.black_rook1_x][self.black_rook1_y] = "black_rook1" if self.black_rook1_x
+    pieces[self.black_rook2_x][self.black_rook2_y] = "black_rook2" if self.black_rook2_x
+    pieces[self.black_bishop1_x][self.black_bishop1_y] = "black_bishop1" if self.black_bishop1_x
+    pieces[self.black_bishop2_x][self.black_bishop2_y] = "black_bishop2" if self.black_bishop2_x
+    pieces[self.black_knight1_x][self.black_knight1_y] = "black_knight1" if self.black_knight1_x
+    pieces[self.black_knight2_x][self.black_knight2_y] = "black_knight2" if self.black_knight2_x
+    pieces[self.black_queen_x][self.black_queen_y] = "black_queen" if self.black_queen_x
+    pieces[self.black_king_x][self.black_king_y] = "black_king" if self.black_king_x
+
+    pieces
+  end
+
   def change_player
     self.current_player = (self.current_player == "white" ? "black" : "white")
     self.save!
@@ -166,7 +216,7 @@ class Game < ActiveRecord::Base
   def resign(player_id)
     self.game_in_progress = false
     self.current_player = nil
-    if player_id == self.white_player_id
+    if player_id == self.white_player
       self.winner = "black"
     else
       self.winner = "white"
@@ -177,8 +227,8 @@ class Game < ActiveRecord::Base
   def to_json(player_id)
     {
      game_in_progress: self.game_in_progress,
-     player_color: (player_id == self.white_player_id ? "white" : "black"),
-     is_current_players_turn: ((player_id == self.white_player_id && current_player == "white") || (player_id != self.white_player_id && current_player == "black") ? true : false),
+     player_color: (player_id == self.white_player ? "white" : "black"),
+     is_current_players_turn: ((player_id == self.white_player && current_player == "white") || (player_id != self.white_player && current_player == "black") ? true : false),
      is_game_over: (self.white_king_x == nil || self.black_king_x == nil ? true : false),
      winner: (self.white_king_x == nil ? "black" : "white"),
      game_state: {

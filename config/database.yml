@@ -6,11 +6,11 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: d5qr9i70qccv2t
+  database: d2uipi562sdnb4
   pool: 5
-  username: iauqxcbyfmkezj
-  password: BPMxPIcHs_10Oo014e5E1wSFtE
-  host: ec2-54-243-48-107.compute-1.amazonaws.com
+  username: pawlnvcwcgrzbx
+  password: vevR1BO6w2Np6i2JRvZxozuiwn
+  host: ec2-54-243-212-162.compute-1.amazonaws.com
   port: 5432
 
 # Warning: The database defined as "test" will be erased and
@@ -19,9 +19,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: de2l5ejkq619fl
+  database: d3l8jeo53ltrp5
   pool: 5
-  username: qyzuguyhjivelo
-  password: 9lbqsqojeO2uDB9ezGLw-zhsSx
-  host: ec2-54-243-48-107.compute-1.amazonaws.com
+  username: klzwbpefedjiam
+  password: fx_F8a0sNaqt8tXAERduLtbWWg
+  host: ec2-54-243-212-162.compute-1.amazonaws.com
   port: 5432

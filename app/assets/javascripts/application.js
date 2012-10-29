@@ -13,3 +13,5 @@
 //= require_self
 //= require jquery.min
 //= require bootstrap.min
+//= require game.js
+//= require json.js

@@ -16,12 +16,12 @@
         </div>
         <div class="span3 well">
           <h3>White Player Id</h3>
-          <label class="btn btn-info disabled"><%= @game.white_player_id %></label>
+          <label class="btn btn-info disabled"><%= @game.white_player %></label>
         </div>
         <div class="span3 well">
           <h3>Black Player Id</h3>
-          <% if @game.game_in_progress and @game.black_player_id != nil %>
-            <label class="btn btn-info disabled"><%= @game.black_player_id %></label>
+          <% if @game.game_in_progress and @game.black_player != nil %>
+            <label class="btn btn-info disabled"><%= @game.black_player %></label>
           <% else %>
             <input type="submit" class="btn btn-primary" value="Simulate Black Player" />
           <% end %>
@@ -29,15 +29,27 @@
       <% end %>
 
       <div>
-        <legend><%= (@game.current_player == "black" && @game.black_player_id == "Synchro" ? "Make a Move" : "Current Game State") %></legend>
+        <legend><%= (@game.current_player == "black" && @game.black_player == "Synchro-#{ @game.id }" ? "Make a Move" : "Current Game State") %></legend>
         <% (0..7).each do |x| %>
           <div class="row">
             <div class="offset1">
               <% (0..7).each do |y| %>
-                <div class="<%= (x % 2 == 0 ? (y % 2 == 0 ? "span1 light-square" : "span1 dark-square") : (y % 2 == 0 ? "span1 dark-square" : "span1 light-square")) %>"></div>
-              <% end %>
+                <a href="javascript: clickPiece(<%= x %>, <%= y %>, <%= @game.current_player == "black" && @game.black_player == "Synchro-#{@game.id }" %>, <%= @pieces_by_positions[x][y] ? @pieces_by_positions[x][y].include?("white_") : false %>);">
+                  <div class="<%= (x % 2 == 0 ? (y % 2 == 0 ? "span1 light-square" : "span1 dark-square") : (y % 2 == 0 ? "span1 dark-square" : "span1 light-square")) %>" style="text-align: center;" id="piece-<%= x %>-<%= y %>">
+                    <% if @pieces_by_positions[x][y] %>
+                      <img src="/assets/<%= @pieces_by_positions[x][y] %>.png" class="chess-piece center" />
+                    <% end %>
+                  </div>
+                <% end %>
+              </a>
             </div>
           </div>
+        <% end %>
+        <% if @game.current_player == "black" && @game.black_player == "Synchro-#{ @game.id }" %>
+          <div class="offset5">
+            <button onclick="cancel()" id="cancelButton" class="span2 btn btn-danger disabled">Cancel</button>
+            <button onclick="submit(<%= @pieces_by_positions.to_json %>, <%= @game.id %>)" id="confirmButton" class="span2 btn btn-primary disabled">Confirm</button>
+          <end>
         <% end %>
       </div>
     </div>

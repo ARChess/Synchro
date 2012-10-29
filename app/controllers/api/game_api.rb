@@ -24,12 +24,14 @@ module Api
     end
     
     get '/' do
-      Game.find_game(params["identifier"]).to_json
+      Game.find_game(params["identifier"]).to_json(params["identifier"])
     end
 
     put '/' do
       request.body.rewind
-      game_state = JSON.parse(request.body.read)
+      body = request.body.read
+      puts body
+      game_state = JSON.parse(body)
       game = Game.find_game(params["identifier"])
       game.set_state(game_state)
       game.change_player
