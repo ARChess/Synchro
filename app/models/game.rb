@@ -2,9 +2,9 @@ require 'json'
 
 class Game < ActiveRecord::Base
   def self.find_game(player_id)
-    game = Game.find_by_white_player_and_game_in_progress(player_id, true)
+    game = Game.all(:conditions => ['white_player = ? and game_in_progress = ?', player_id, true]).first
     if game == nil
-      game = Game.find_by_black_player_and_game_in_progress(player_id, true)
+      game = Game.all(:conditions => ['black_player = ? and game_in_progress = ?', player_id, true]).first
     end
     return game if game != nil
 
