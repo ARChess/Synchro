@@ -123,7 +123,7 @@ window.setInterval(function() {
         beforeSend: function(xhrObj){
             xhrObj.setRequestHeader("API_KEY","traprubepreyed2ebupucramunumus4ebewruyUdraga36pacrujavuKep8afref");
         },
-        url: "/api?identifier=Synchro-" + id,
+        url: "/api?identifier=" + $("[class='btn btn-info disabled']")[1].innerText,
         type: "GET",
         contentType: "application/json",
         data: data,
