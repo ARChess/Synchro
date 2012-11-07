@@ -27,6 +27,10 @@ module Api
       Game.find_game(params["identifier"]).to_json(params["identifier"])
     end
 
+    post '/' do
+      Game.create_game(params["identifier"]).to_json(params["identifier"])
+    end
+
     put '/' do
       request.body.rewind
       body = request.body.read

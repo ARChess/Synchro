@@ -2,12 +2,14 @@ require 'json'
 
 class Game < ActiveRecord::Base
   def self.find_game(player_id)
-    game = Game.all(:conditions => ['white_player = ? and game_in_progress = ?', player_id, true]).first
+    game = Game.all(:conditions => ['white_player = ?', player_id]).last
     if game == nil
-      game = Game.all(:conditions => ['black_player = ? and game_in_progress = ?', player_id, true]).first
+      game = Game.all(:conditions => ['black_player = ?', player_id]).last
     end
-    return game if game != nil
+    return game
+  end
 
+  def self.create_game(player_id)
     game = Game.where(:black_player => nil, :game_in_progress => true).first
     if game != nil
       game.black_player = player_id
