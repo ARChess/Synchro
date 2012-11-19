@@ -40,7 +40,6 @@ function cancel() {
 
 function submit(pieces, id) {
     var data = {
-        "game_state": {
             "black": {
                 "pawn1": { "x": -1, "y": -1 },
                 "pawn2": { "x": -1, "y": -1 },
@@ -77,8 +76,7 @@ function submit(pieces, id) {
                 "queen": { "x": -1, "y": -1 },
                 "king": { "x": -1, "y": -1 }
             }
-        }
-    };
+        };
     
     for(var i = 0; i < 8; ++i) {
         for(var j = 0; j < 8; ++j) {
@@ -86,14 +84,14 @@ function submit(pieces, id) {
                 var color = pieces[""+i][""+j].split("_")[0];
                 var piece = pieces[""+i][""+j].split("_")[1];
                 if(toSpaceX == i && toSpaceY == j) {
-                    data["game_state"][color][piece]["x"] = -1;
-                    data["game_state"][color][piece]["y"] = -1;
+                    data[color][piece]["x"] = -1;
+                    data[color][piece]["y"] = -1;
                 } if(selectedPieceX == i && selectedPieceY == j) {
-                    data["game_state"][color][piece]["x"] = toSpaceX;
-                    data["game_state"][color][piece]["y"] = toSpaceY;
+                    data[color][piece]["x"] = toSpaceX;
+                    data[color][piece]["y"] = toSpaceY;
                 } else {
-                    data["game_state"][color][piece]["x"] = i;
-                    data["game_state"][color][piece]["y"] = j;
+                    data[color][piece]["x"] = i;
+                    data[color][piece]["y"] = j;
                 }
             }
         }
