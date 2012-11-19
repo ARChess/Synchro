@@ -173,39 +173,39 @@ class Game < ActiveRecord::Base
       7 => { }
     }
     
-    pieces[self.white_pawn1_x][self.white_pawn1_y] = "white_pawn1" if self.white_pawn1_x
-    pieces[self.white_pawn2_x][self.white_pawn2_y] = "white_pawn2" if self.white_pawn2_x
-    pieces[self.white_pawn3_x][self.white_pawn3_y] = "white_pawn3" if self.white_pawn3_x
-    pieces[self.white_pawn4_x][self.white_pawn4_y] = "white_pawn4" if self.white_pawn4_x
-    pieces[self.white_pawn5_x][self.white_pawn5_y] = "white_pawn5" if self.white_pawn5_x
-    pieces[self.white_pawn6_x][self.white_pawn6_y] = "white_pawn6" if self.white_pawn6_x
-    pieces[self.white_pawn7_x][self.white_pawn7_y] = "white_pawn7" if self.white_pawn7_x
-    pieces[self.white_pawn8_x][self.white_pawn8_y] = "white_pawn8" if self.white_pawn8_x
-    pieces[self.white_rook1_x][self.white_rook1_y] = "white_rook1" if self.white_rook1_x
-    pieces[self.white_rook2_x][self.white_rook2_y] = "white_rook2" if self.white_rook2_x
-    pieces[self.white_bishop1_x][self.white_bishop1_y] = "white_bishop1" if self.white_bishop1_x
-    pieces[self.white_bishop2_x][self.white_bishop2_y] = "white_bishop2" if self.white_bishop2_x
-    pieces[self.white_knight1_x][self.white_knight1_y] = "white_knight1" if self.white_knight1_x
-    pieces[self.white_knight2_x][self.white_knight2_y] = "white_knight2" if self.white_knight2_x
-    pieces[self.white_queen_x][self.white_queen_y] = "white_queen" if self.white_queen_x
-    pieces[self.white_king_x][self.white_king_y] = "white_king" if self.white_king_x
+    pieces[self.white_pawn1_x][self.white_pawn1_y] = "white_pawn1" if self.white_pawn1_x != -1
+    pieces[self.white_pawn2_x][self.white_pawn2_y] = "white_pawn2" if self.white_pawn2_x != -1
+    pieces[self.white_pawn3_x][self.white_pawn3_y] = "white_pawn3" if self.white_pawn3_x != -1
+    pieces[self.white_pawn4_x][self.white_pawn4_y] = "white_pawn4" if self.white_pawn4_x != -1
+    pieces[self.white_pawn5_x][self.white_pawn5_y] = "white_pawn5" if self.white_pawn5_x != -1
+    pieces[self.white_pawn6_x][self.white_pawn6_y] = "white_pawn6" if self.white_pawn6_x != -1
+    pieces[self.white_pawn7_x][self.white_pawn7_y] = "white_pawn7" if self.white_pawn7_x != -1
+    pieces[self.white_pawn8_x][self.white_pawn8_y] = "white_pawn8" if self.white_pawn8_x != -1
+    pieces[self.white_rook1_x][self.white_rook1_y] = "white_rook1" if self.white_rook1_x != -1
+    pieces[self.white_rook2_x][self.white_rook2_y] = "white_rook2" if self.white_rook2_x != -1
+    pieces[self.white_bishop1_x][self.white_bishop1_y] = "white_bishop1" if self.white_bishop1_x != -1
+    pieces[self.white_bishop2_x][self.white_bishop2_y] = "white_bishop2" if self.white_bishop2_x != -1
+    pieces[self.white_knight1_x][self.white_knight1_y] = "white_knight1" if self.white_knight1_x != -1
+    pieces[self.white_knight2_x][self.white_knight2_y] = "white_knight2" if self.white_knight2_x != -1
+    pieces[self.white_queen_x][self.white_queen_y] = "white_queen" if self.white_queen_x != -1
+    pieces[self.white_king_x][self.white_king_y] = "white_king" if self.white_king_x != -1
     
-    pieces[self.black_pawn1_x][self.black_pawn1_y] = "black_pawn1" if self.black_pawn1_x
-    pieces[self.black_pawn2_x][self.black_pawn2_y] = "black_pawn2" if self.black_pawn2_x
-    pieces[self.black_pawn3_x][self.black_pawn3_y] = "black_pawn3" if self.black_pawn3_x
-    pieces[self.black_pawn4_x][self.black_pawn4_y] = "black_pawn4" if self.black_pawn4_x
-    pieces[self.black_pawn5_x][self.black_pawn5_y] = "black_pawn5" if self.black_pawn5_x
-    pieces[self.black_pawn6_x][self.black_pawn6_y] = "black_pawn6" if self.black_pawn6_x
-    pieces[self.black_pawn7_x][self.black_pawn7_y] = "black_pawn7" if self.black_pawn7_x
-    pieces[self.black_pawn8_x][self.black_pawn8_y] = "black_pawn8" if self.black_pawn8_x
-    pieces[self.black_rook1_x][self.black_rook1_y] = "black_rook1" if self.black_rook1_x
-    pieces[self.black_rook2_x][self.black_rook2_y] = "black_rook2" if self.black_rook2_x
-    pieces[self.black_bishop1_x][self.black_bishop1_y] = "black_bishop1" if self.black_bishop1_x
-    pieces[self.black_bishop2_x][self.black_bishop2_y] = "black_bishop2" if self.black_bishop2_x
-    pieces[self.black_knight1_x][self.black_knight1_y] = "black_knight1" if self.black_knight1_x
-    pieces[self.black_knight2_x][self.black_knight2_y] = "black_knight2" if self.black_knight2_x
-    pieces[self.black_queen_x][self.black_queen_y] = "black_queen" if self.black_queen_x
-    pieces[self.black_king_x][self.black_king_y] = "black_king" if self.black_king_x
+    pieces[self.black_pawn1_x][self.black_pawn1_y] = "black_pawn1" if self.black_pawn1_x != -1
+    pieces[self.black_pawn2_x][self.black_pawn2_y] = "black_pawn2" if self.black_pawn2_x != -1
+    pieces[self.black_pawn3_x][self.black_pawn3_y] = "black_pawn3" if self.black_pawn3_x != -1
+    pieces[self.black_pawn4_x][self.black_pawn4_y] = "black_pawn4" if self.black_pawn4_x != -1
+    pieces[self.black_pawn5_x][self.black_pawn5_y] = "black_pawn5" if self.black_pawn5_x != -1
+    pieces[self.black_pawn6_x][self.black_pawn6_y] = "black_pawn6" if self.black_pawn6_x != -1
+    pieces[self.black_pawn7_x][self.black_pawn7_y] = "black_pawn7" if self.black_pawn7_x != -1
+    pieces[self.black_pawn8_x][self.black_pawn8_y] = "black_pawn8" if self.black_pawn8_x != -1
+    pieces[self.black_rook1_x][self.black_rook1_y] = "black_rook1" if self.black_rook1_x != -1
+    pieces[self.black_rook2_x][self.black_rook2_y] = "black_rook2" if self.black_rook2_x != -1
+    pieces[self.black_bishop1_x][self.black_bishop1_y] = "black_bishop1" if self.black_bishop1_x != -1
+    pieces[self.black_bishop2_x][self.black_bishop2_y] = "black_bishop2" if self.black_bishop2_x != -1
+    pieces[self.black_knight1_x][self.black_knight1_y] = "black_knight1" if self.black_knight1_x != -1
+    pieces[self.black_knight2_x][self.black_knight2_y] = "black_knight2" if self.black_knight2_x != -1
+    pieces[self.black_queen_x][self.black_queen_y] = "black_queen" if self.black_queen_x != -1
+    pieces[self.black_king_x][self.black_king_y] = "black_king" if self.black_king_x != -1
 
     pieces
   end
