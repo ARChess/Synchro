@@ -3,16 +3,16 @@ var selectedPieceX = -1, selectedPieceY = -1;
 var toSpaceX = -1, toSpaceY = -1;
 var currentPlayer = "";
 
-function clickPiece(x, y, enabled, isWhite) {
+function clickPiece(x, y, enabled, isWhite, isBlack, current_player) {
     if(enabled == true) {
-        if(clickedOnce == 0 && !isWhite) {
+        if(clickedOnce == 0 && ((current_player == "white" && isWhite == true) || (current_player == "black" && isBlack == true))) {
             $("#piece-" + x + "-" + y).css("border", "3px solid blue");
             $("#cancelButton").removeClass("disabled");
             clickedOnce = 1;
             selectedPieceX = x;
             selectedPieceY = y;
         } else {
-            if(clickedOnce == 1 && !(x == selectedPieceX && y == selectedPieceY)) {
+            if(clickedOnce == 1 && !(x == selectedPieceX && y == selectedPieceY) && ((current_player == "white" && isWhite == false) || (current_player == "black" && isBlack == false))) {
                 $("#piece-" + x + "-" + y).css("border", "3px solid red");
                 $("#confirmButton").removeClass("disabled");
                 clickedOnce = 2;
@@ -139,4 +139,19 @@ window.setInterval(function() {
     });
 },6000);
 
-
+function createNewGame(count) {
+    $.ajax({
+        beforeSend: function(xhrObj){
+            xhrObj.setRequestHeader("API_KEY","traprubepreyed2ebupucramunumus4ebewruyUdraga36pacrujavuKep8afref");
+        },
+        url: "/api?identifier=Synchro-Initiated",
+        type: "POST",
+        contentType: "application/json",
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert(errorThrown);
+        }, 
+        success: function(data, textStatus, XMLHttpRequest){
+            document.location.reload(true);
+        }
+    });
+}

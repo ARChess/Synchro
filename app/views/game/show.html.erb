@@ -20,7 +20,7 @@
         </div>
         <div class="span3 well">
           <h3>Black Player Id</h3>
-          <% if @game.game_in_progress and @game.black_player != nil %>
+          <% if @game.game_in_progress and (@game.black_player != nil || @game.white_player == "Synchro-Initiated") %>
             <label class="btn btn-info disabled"><%= @game.black_player %></label>
           <% else %>
             <input type="submit" class="btn btn-primary" value="Simulate Black Player" />
@@ -34,7 +34,7 @@
           <div class="row">
             <div class="offset1">
               <% (0..7).each do |y| %>
-                <a href="javascript: clickPiece(<%= x %>, <%= y %>, <%= @game.current_player == "black" && @game.black_player == "Synchro-#{@game.id }" %>, <%= @pieces_by_positions[x][y] ? @pieces_by_positions[x][y].include?("white_") : false %>);">
+                <a href="javascript: clickPiece(<%= x %>, <%= y %>, <%= (@game.current_player == "black" && @game.black_player == "Synchro-#{@game.id}") || (@game.current_player == "white" && @game.white_player == "Synchro-Initiated") %>, <%= @pieces_by_positions[x][y] ? @pieces_by_positions[x][y].include?("white_") : false %>, <%= @pieces_by_positions[x][y] ? @pieces_by_positions[x][y].include?("black_") : false %>, '<%= @game.current_player %>');">
                   <div class="<%= (x % 2 == 0 ? (y % 2 == 0 ? "span1 light-square" : "span1 dark-square") : (y % 2 == 0 ? "span1 dark-square" : "span1 light-square")) %>" style="text-align: center;" id="piece-<%= x %>-<%= y %>">
                     <% if @pieces_by_positions[x][y] %>
                       <img src="/assets/<%= @pieces_by_positions[x][y] %>.png" class="chess-piece center" />
@@ -45,10 +45,10 @@
             </div>
           </div>
         <% end %>
-        <% if @game.current_player == "black" && @game.black_player == "Synchro-#{ @game.id }" %>
+        <% if (@game.current_player == "black" && @game.black_player == "Synchro-#{@game.id}") || (@game.current_player == "white" && @game.white_player == "Synchro-Initiated") %>
           <div class="offset5">
             <button onclick="cancel()" id="cancelButton" class="span2 btn btn-danger disabled">Cancel</button>
-            <button onclick="submit(<%= @pieces_by_positions.to_json %>, <%= @game.id %>)" id="confirmButton" class="span2 btn btn-primary disabled">Confirm</button>
+            <button onclick="submit(<%= @pieces_by_positions.to_json %>, '<%= (@game.current_player == "black" ? @game.id : "Initiated") %>')" id="confirmButton" class="span2 btn btn-primary disabled">Confirm</button>
           <end>
         <% end %>
       </div>
