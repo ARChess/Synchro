@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129002820) do
+ActiveRecord::Schema.define(:version => 20121129005243) do
 
   create_table "games", :force => true do |t|
     t.boolean  "game_in_progress"
@@ -83,10 +83,42 @@ ActiveRecord::Schema.define(:version => 20121129002820) do
     t.integer  "white_bishop2_y"
     t.integer  "white_queen_y"
     t.integer  "white_king_y"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "white_in_check",   :default => false
-    t.boolean  "black_in_check",   :default => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.boolean  "white_in_check",                :default => false
+    t.boolean  "black_in_check",                :default => false
+    t.string   "black_pawn1_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn2_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn3_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn4_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn5_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn6_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn7_masquerading_as",   :default => "pawn"
+    t.string   "black_pawn8_masquerading_as",   :default => "pawn"
+    t.string   "black_rook1_masquerading_as",   :default => "rook"
+    t.string   "black_rook2_masquerading_as",   :default => "rook"
+    t.string   "black_bishop1_masquerading_as", :default => "bishop"
+    t.string   "black_bishop2_masquerading_as", :default => "bishop"
+    t.string   "black_knight1_masquerading_as", :default => "knight"
+    t.string   "black_knight2_masquerading_as", :default => "knight"
+    t.string   "black_queen_masquerading_as",   :default => "queen"
+    t.string   "black_king_masquerading_as",    :default => "king"
+    t.string   "white_pawn1_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn2_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn3_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn4_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn5_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn6_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn7_masquerading_as",   :default => "pawn"
+    t.string   "white_pawn8_masquerading_as",   :default => "pawn"
+    t.string   "white_rook1_masquerading_as",   :default => "rook"
+    t.string   "white_rook2_masquerading_as",   :default => "rook"
+    t.string   "white_bishop1_masquerading_as", :default => "bishop"
+    t.string   "white_bishop2_masquerading_as", :default => "bishop"
+    t.string   "white_knight1_masquerading_as", :default => "knight"
+    t.string   "white_knight2_masquerading_as", :default => "knight"
+    t.string   "white_queen_masquerading_as",   :default => "queen"
+    t.string   "white_king_masquerading_as",    :default => "king"
   end
 
   create_table "users", :force => true do |t|

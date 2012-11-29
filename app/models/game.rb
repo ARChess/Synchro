@@ -95,6 +95,42 @@ class Game < ActiveRecord::Base
 
   def set_state(game)
     self.black_in_check = game["black"]["in_check"]
+    self.white_in_check = game["white"]["in_check"]
+    
+    self.black_pawn1_masquerading_as = game["black"]["pawn1"]["masquerading_as"]
+    self.black_pawn2_masquerading_as = game["black"]["pawn2"]["masquerading_as"]
+    self.black_pawn3_masquerading_as = game["black"]["pawn3"]["masquerading_as"]
+    self.black_pawn4_masquerading_as = game["black"]["pawn4"]["masquerading_as"]
+    self.black_pawn5_masquerading_as = game["black"]["pawn5"]["masquerading_as"]
+    self.black_pawn6_masquerading_as = game["black"]["pawn6"]["masquerading_as"]
+    self.black_pawn7_masquerading_as = game["black"]["pawn7"]["masquerading_as"]
+    self.black_pawn8_masquerading_as = game["black"]["pawn8"]["masquerading_as"]
+    self.black_rook1_masquerading_as = game["black"]["rook1"]["masquerading_as"]
+    self.black_rook2_masquerading_as = game["black"]["rook2"]["masquerading_as"]
+    self.black_bishop1_masquerading_as = game["black"]["bishop1"]["masquerading_as"]
+    self.black_bishop2_masquerading_as = game["black"]["bishop2"]["masquerading_as"]
+    self.black_knight1_masquerading_as = game["black"]["knight1"]["masquerading_as"]
+    self.black_knight2_masquerading_as = game["black"]["knight2"]["masquerading_as"]
+    self.black_queen_masquerading_as = game["black"]["queen"]["masquerading_as"]
+    self.black_king_masquerading_as = game["black"]["king"]["masquerading_as"]
+
+    self.white_pawn1_masquerading_as = game["white"]["pawn1"]["masquerading_as"]
+    self.white_pawn2_masquerading_as = game["white"]["pawn2"]["masquerading_as"]
+    self.white_pawn3_masquerading_as = game["white"]["pawn3"]["masquerading_as"]
+    self.white_pawn4_masquerading_as = game["white"]["pawn4"]["masquerading_as"]
+    self.white_pawn5_masquerading_as = game["white"]["pawn5"]["masquerading_as"]
+    self.white_pawn6_masquerading_as = game["white"]["pawn6"]["masquerading_as"]
+    self.white_pawn7_masquerading_as = game["white"]["pawn7"]["masquerading_as"]
+    self.white_pawn8_masquerading_as = game["white"]["pawn8"]["masquerading_as"]
+    self.white_rook1_masquerading_as = game["white"]["rook1"]["masquerading_as"]
+    self.white_rook2_masquerading_as = game["white"]["rook2"]["masquerading_as"]
+    self.white_bishop1_masquerading_as = game["white"]["bishop1"]["masquerading_as"]
+    self.white_bishop2_masquerading_as = game["white"]["bishop2"]["masquerading_as"]
+    self.white_knight1_masquerading_as = game["white"]["knight1"]["masquerading_as"]
+    self.white_knight2_masquerading_as = game["white"]["knight2"]["masquerading_as"]
+    self.white_queen_masquerading_as = game["white"]["queen"]["masquerading_as"]
+    self.white_king_masquerading_as = game["white"]["king"]["masquerading_as"]
+
     self.black_pawn1_x = game["black"]["pawn1"]["x"]
     self.black_pawn2_x = game["black"]["pawn2"]["x"]
     self.black_pawn3_x = game["black"]["pawn3"]["x"]
@@ -111,7 +147,7 @@ class Game < ActiveRecord::Base
     self.black_bishop2_x = game["black"]["bishop2"]["x"]
     self.black_queen_x = game["black"]["queen"]["x"]
     self.black_king_x = game["black"]["king"]["x"]
-    self.white_in_check = game["white"]["in_check"]
+
     self.white_pawn1_x = game["white"]["pawn1"]["x"]
     self.white_pawn2_x = game["white"]["pawn2"]["x"]
     self.white_pawn3_x = game["white"]["pawn3"]["x"]
@@ -128,6 +164,7 @@ class Game < ActiveRecord::Base
     self.white_bishop2_x = game["white"]["bishop2"]["x"]
     self.white_queen_x = game["white"]["queen"]["x"]
     self.white_king_x = game["white"]["king"]["x"]
+    
     self.black_pawn1_y = game["black"]["pawn1"]["y"]
     self.black_pawn2_y = game["black"]["pawn2"]["y"]
     self.black_pawn3_y = game["black"]["pawn3"]["y"]
@@ -144,6 +181,7 @@ class Game < ActiveRecord::Base
     self.black_bishop2_y = game["black"]["bishop2"]["y"]
     self.black_queen_y = game["black"]["queen"]["y"]
     self.black_king_y = game["black"]["king"]["y"]
+
     self.white_pawn1_y = game["white"]["pawn1"]["y"]
     self.white_pawn2_y = game["white"]["pawn2"]["y"]
     self.white_pawn3_y = game["white"]["pawn3"]["y"]
@@ -239,41 +277,41 @@ class Game < ActiveRecord::Base
      game_state: {
                   white: {
                           in_check: self.white_in_check,
-                          pawn1: { x: self.white_pawn1_x, y: self.white_pawn1_y },
-                          pawn2: { x: self.white_pawn2_x, y: self.white_pawn2_y },
-                          pawn3: { x: self.white_pawn3_x, y: self.white_pawn3_y },
-                          pawn4: { x: self.white_pawn4_x, y: self.white_pawn4_y },
-                          pawn5: { x: self.white_pawn5_x, y: self.white_pawn5_y },
-                          pawn6: { x: self.white_pawn6_x, y: self.white_pawn6_y },
-                          pawn7: { x: self.white_pawn7_x, y: self.white_pawn7_y },
-                          pawn8: { x: self.white_pawn8_x, y: self.white_pawn8_y },
-                          rook1: { x: self.white_rook1_x, y: self.white_rook1_y },
-                          rook2: { x: self.white_rook2_x, y: self.white_rook2_y },
-                          knight1: { x: self.white_knight1_x, y: self.white_knight1_y },
-                          knight2: { x: self.white_knight2_x, y: self.white_knight2_y },
-                          bishop1: { x: self.white_bishop1_x, y: self.white_bishop1_y },
-                          bishop2: { x: self.white_bishop2_x, y: self.white_bishop2_y },
-                          queen: { x: self.white_queen_x, y: self.white_queen_y },
-                          king: { x: self.white_king_x, y: self.white_king_y }
+                          pawn1: { x: self.white_pawn1_x, y: self.white_pawn1_y, masquerading_as: self.white_pawn1_masquerading_as },
+                          pawn2: { x: self.white_pawn2_x, y: self.white_pawn2_y, masquerading_as: self.white_pawn2_masquerading_as },
+                          pawn3: { x: self.white_pawn3_x, y: self.white_pawn3_y, masquerading_as: self.white_pawn3_masquerading_as },
+                          pawn4: { x: self.white_pawn4_x, y: self.white_pawn4_y, masquerading_as: self.white_pawn4_masquerading_as },
+                          pawn5: { x: self.white_pawn5_x, y: self.white_pawn5_y, masquerading_as: self.white_pawn5_masquerading_as },
+                          pawn6: { x: self.white_pawn6_x, y: self.white_pawn6_y, masquerading_as: self.white_pawn6_masquerading_as },
+                          pawn7: { x: self.white_pawn7_x, y: self.white_pawn7_y, masquerading_as: self.white_pawn7_masquerading_as },
+                          pawn8: { x: self.white_pawn8_x, y: self.white_pawn8_y, masquerading_as: self.white_pawn8_masquerading_as },
+                          rook1: { x: self.white_rook1_x, y: self.white_rook1_y, masquerading_as: self.white_rook1_masquerading_as },
+                          rook2: { x: self.white_rook2_x, y: self.white_rook2_y, masquerading_as: self.white_rook2_masquerading_as },
+                          knight1: { x: self.white_knight1_x, y: self.white_knight1_y, masquerading_as: self.white_knight1_masquerading_as },
+                          knight2: { x: self.white_knight2_x, y: self.white_knight2_y, masquerading_as: self.white_knight2_masquerading_as },
+                          bishop1: { x: self.white_bishop1_x, y: self.white_bishop1_y, masquerading_as: self.white_bishop1_masquerading_as },
+                          bishop2: { x: self.white_bishop2_x, y: self.white_bishop2_y, masquerading_as: self.white_bishop2_masquerading_as },
+                          queen: { x: self.white_queen_x, y: self.white_queen_y, masquerading_as: self.white_queen_masquerading_as },
+                          king: { x: self.white_king_x, y: self.white_king_y, masquerading_as: self.white_king_masquerading_as }
                          },
                   black: {
                           in_check: self.black_in_check,
-                          pawn1: { x: self.black_pawn1_x, y: self.black_pawn1_y },
-                          pawn2: { x: self.black_pawn2_x, y: self.black_pawn2_y },
-                          pawn3: { x: self.black_pawn3_x, y: self.black_pawn3_y },
-                          pawn4: { x: self.black_pawn4_x, y: self.black_pawn4_y },
-                          pawn5: { x: self.black_pawn5_x, y: self.black_pawn5_y },
-                          pawn6: { x: self.black_pawn6_x, y: self.black_pawn6_y },
-                          pawn7: { x: self.black_pawn7_x, y: self.black_pawn7_y },
-                          pawn8: { x: self.black_pawn8_x, y: self.black_pawn8_y },
-                          rook1: { x: self.black_rook1_x, y: self.black_rook1_y },
-                          rook2: { x: self.black_rook2_x, y: self.black_rook2_y },
-                          knight1: { x: self.black_knight1_x, y: self.black_knight1_y },
-                          knight2: { x: self.black_knight2_x, y: self.black_knight2_y },
-                          bishop1: { x: self.black_bishop1_x, y: self.black_bishop1_y },
-                          bishop2: { x: self.black_bishop2_x, y: self.black_bishop2_y },
-                          queen: { x: self.black_queen_x, y: self.black_queen_y },
-                          king: { x: self.black_king_x, y: self.black_king_y }
+                          pawn1: { x: self.black_pawn1_x, y: self.black_pawn1_y, masquerading_as: self.black_pawn1_masquerading_as },
+                          pawn2: { x: self.black_pawn2_x, y: self.black_pawn2_y, masquerading_as: self.black_pawn2_masquerading_as },
+                          pawn3: { x: self.black_pawn3_x, y: self.black_pawn3_y, masquerading_as: self.black_pawn3_masquerading_as },
+                          pawn4: { x: self.black_pawn4_x, y: self.black_pawn4_y, masquerading_as: self.black_pawn4_masquerading_as },
+                          pawn5: { x: self.black_pawn5_x, y: self.black_pawn5_y, masquerading_as: self.black_pawn5_masquerading_as },
+                          pawn6: { x: self.black_pawn6_x, y: self.black_pawn6_y, masquerading_as: self.black_pawn6_masquerading_as },
+                          pawn7: { x: self.black_pawn7_x, y: self.black_pawn7_y, masquerading_as: self.black_pawn7_masquerading_as },
+                          pawn8: { x: self.black_pawn8_x, y: self.black_pawn8_y, masquerading_as: self.black_pawn8_masquerading_as },
+                          rook1: { x: self.black_rook1_x, y: self.black_rook1_y, masquerading_as: self.black_rook1_masquerading_as },
+                          rook2: { x: self.black_rook2_x, y: self.black_rook2_y, masquerading_as: self.black_rook2_masquerading_as },
+                          knight1: { x: self.black_knight1_x, y: self.black_knight1_y, masquerading_as: self.black_knight1_masquerading_as },
+                          knight2: { x: self.black_knight2_x, y: self.black_knight2_y, masquerading_as: self.black_knight2_masquerading_as },
+                          bishop1: { x: self.black_bishop1_x, y: self.black_bishop1_y, masquerading_as: self.black_bishop1_masquerading_as },
+                          bishop2: { x: self.black_bishop2_x, y: self.black_bishop2_y, masquerading_as: self.black_bishop2_masquerading_as },
+                          queen: { x: self.black_queen_x, y: self.black_queen_y, masquerading_as: self.black_queen_masquerading_as },
+                          king: { x: self.black_king_x, y: self.black_king_y, masquerading_as: self.black_king_masquerading_as }
                          }
                  }
     }.to_json
