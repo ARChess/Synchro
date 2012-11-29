@@ -94,6 +94,7 @@ class Game < ActiveRecord::Base
   end
 
   def set_state(game)
+    self.black_in_check = game["black"]["in_check"]
     self.black_pawn1_x = game["black"]["pawn1"]["x"]
     self.black_pawn2_x = game["black"]["pawn2"]["x"]
     self.black_pawn3_x = game["black"]["pawn3"]["x"]
@@ -110,6 +111,7 @@ class Game < ActiveRecord::Base
     self.black_bishop2_x = game["black"]["bishop2"]["x"]
     self.black_queen_x = game["black"]["queen"]["x"]
     self.black_king_x = game["black"]["king"]["x"]
+    self.white_in_check = game["white"]["in_check"]
     self.white_pawn1_x = game["white"]["pawn1"]["x"]
     self.white_pawn2_x = game["white"]["pawn2"]["x"]
     self.white_pawn3_x = game["white"]["pawn3"]["x"]
@@ -236,6 +238,7 @@ class Game < ActiveRecord::Base
      winner: (self.white_king_x == nil ? "black" : "white"),
      game_state: {
                   white: {
+                          in_check: self.white_in_check,
                           pawn1: { x: self.white_pawn1_x, y: self.white_pawn1_y },
                           pawn2: { x: self.white_pawn2_x, y: self.white_pawn2_y },
                           pawn3: { x: self.white_pawn3_x, y: self.white_pawn3_y },
@@ -254,6 +257,7 @@ class Game < ActiveRecord::Base
                           king: { x: self.white_king_x, y: self.white_king_y }
                          },
                   black: {
+                          in_check: self.black_in_check,
                           pawn1: { x: self.black_pawn1_x, y: self.black_pawn1_y },
                           pawn2: { x: self.black_pawn2_x, y: self.black_pawn2_y },
                           pawn3: { x: self.black_pawn3_x, y: self.black_pawn3_y },

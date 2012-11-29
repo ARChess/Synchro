@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028123239) do
+ActiveRecord::Schema.define(:version => 20121129002820) do
 
   create_table "games", :force => true do |t|
     t.boolean  "game_in_progress"
@@ -83,8 +83,10 @@ ActiveRecord::Schema.define(:version => 20121028123239) do
     t.integer  "white_bishop2_y"
     t.integer  "white_queen_y"
     t.integer  "white_king_y"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "white_in_check",   :default => false
+    t.boolean  "black_in_check",   :default => false
   end
 
   create_table "users", :force => true do |t|
