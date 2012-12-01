@@ -1,5 +1,4 @@
-Synchro
-========================
+##Synchro
 
 Rails Version : 3.2.7
 
@@ -7,16 +6,15 @@ Ruby Version : 1.9.3
 
 Host : Heroku
 
-Setup and Installation
-======================
+##Setup and Installation
 
 Install gems for Ruby.
 
     gem install bundler --pre
     bundle install
 
-Running Application
-===================
+##Running Application
+
 
 To start, open terminal and enter:
 
@@ -33,8 +31,7 @@ You can now navigate to the server at http://localhost:3000/.  To create a login
 
 You should now have an account.  Note: At save, the entered password has been hashed and cannot be reverse engineered.  There is currently no way to reset your password except for recreating your account.
 
-Deploying
-=========
+##Deploying
 
     git remote add heroku git@heroku.com:synchro-archess.git
     git push heroku master
