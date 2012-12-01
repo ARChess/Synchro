@@ -1,6 +1,7 @@
 require 'json'
 
 class Game < ActiveRecord::Base
+  # find the game associated with a phone unique id
   def self.find_game(player_id)
     game = Game.all(:conditions => ['white_player = ?', player_id]).last
     if game == nil
@@ -9,6 +10,7 @@ class Game < ActiveRecord::Base
     return game
   end
 
+  # create a game for a given phone
   def self.create_game(player_id)
     game = Game.where(:black_player => nil, :game_in_progress => true).first
     if game != nil
@@ -21,6 +23,7 @@ class Game < ActiveRecord::Base
     return game
   end
 
+  # start a game with all the pieces in the correct position
   def init(white_player_id)
     self.game_in_progress = true
     self.current_player = "white"
@@ -93,47 +96,50 @@ class Game < ActiveRecord::Base
     self
   end
 
+  # state was received from the server, so update database accordingly
   def set_state(game)
     self.black_in_check = game["black"]["in_check"]
     self.white_in_check = game["white"]["in_check"]
     
-	if game["black"]["pawn1"]["masquerading_as"]
-		self.black_pawn1_masquerading_as = game["black"]["pawn1"]["masquerading_as"]
-		self.black_pawn2_masquerading_as = game["black"]["pawn2"]["masquerading_as"]
-		self.black_pawn3_masquerading_as = game["black"]["pawn3"]["masquerading_as"]
-		self.black_pawn4_masquerading_as = game["black"]["pawn4"]["masquerading_as"]
-		self.black_pawn5_masquerading_as = game["black"]["pawn5"]["masquerading_as"]
-		self.black_pawn6_masquerading_as = game["black"]["pawn6"]["masquerading_as"]
-		self.black_pawn7_masquerading_as = game["black"]["pawn7"]["masquerading_as"]
-		self.black_pawn8_masquerading_as = game["black"]["pawn8"]["masquerading_as"]
-		self.black_rook1_masquerading_as = game["black"]["rook1"]["masquerading_as"]
-		self.black_rook2_masquerading_as = game["black"]["rook2"]["masquerading_as"]
-		self.black_bishop1_masquerading_as = game["black"]["bishop1"]["masquerading_as"]
-		self.black_bishop2_masquerading_as = game["black"]["bishop2"]["masquerading_as"]
-		self.black_knight1_masquerading_as = game["black"]["knight1"]["masquerading_as"]
-		self.black_knight2_masquerading_as = game["black"]["knight2"]["masquerading_as"]
-		self.black_queen_masquerading_as = game["black"]["queen"]["masquerading_as"]
-		self.black_king_masquerading_as = game["black"]["king"]["masquerading_as"]
-	end
+    # only update masquerade types if masquerade types were sent
+    if game["black"]["pawn1"]["masquerading_as"]
+      self.black_pawn1_masquerading_as = game["black"]["pawn1"]["masquerading_as"]
+      self.black_pawn2_masquerading_as = game["black"]["pawn2"]["masquerading_as"]
+      self.black_pawn3_masquerading_as = game["black"]["pawn3"]["masquerading_as"]
+      self.black_pawn4_masquerading_as = game["black"]["pawn4"]["masquerading_as"]
+      self.black_pawn5_masquerading_as = game["black"]["pawn5"]["masquerading_as"]
+      self.black_pawn6_masquerading_as = game["black"]["pawn6"]["masquerading_as"]
+      self.black_pawn7_masquerading_as = game["black"]["pawn7"]["masquerading_as"]
+      self.black_pawn8_masquerading_as = game["black"]["pawn8"]["masquerading_as"]
+      self.black_rook1_masquerading_as = game["black"]["rook1"]["masquerading_as"]
+      self.black_rook2_masquerading_as = game["black"]["rook2"]["masquerading_as"]
+      self.black_bishop1_masquerading_as = game["black"]["bishop1"]["masquerading_as"]
+      self.black_bishop2_masquerading_as = game["black"]["bishop2"]["masquerading_as"]
+      self.black_knight1_masquerading_as = game["black"]["knight1"]["masquerading_as"]
+      self.black_knight2_masquerading_as = game["black"]["knight2"]["masquerading_as"]
+      self.black_queen_masquerading_as = game["black"]["queen"]["masquerading_as"]
+      self.black_king_masquerading_as = game["black"]["king"]["masquerading_as"]
+    end
 
-	if game["white"]["pawn1"]["masquerading_as"]
-		self.white_pawn1_masquerading_as = game["white"]["pawn1"]["masquerading_as"]
-		self.white_pawn2_masquerading_as = game["white"]["pawn2"]["masquerading_as"]
-		self.white_pawn3_masquerading_as = game["white"]["pawn3"]["masquerading_as"]
-		self.white_pawn4_masquerading_as = game["white"]["pawn4"]["masquerading_as"]
-		self.white_pawn5_masquerading_as = game["white"]["pawn5"]["masquerading_as"]
-		self.white_pawn6_masquerading_as = game["white"]["pawn6"]["masquerading_as"]
-		self.white_pawn7_masquerading_as = game["white"]["pawn7"]["masquerading_as"]
-		self.white_pawn8_masquerading_as = game["white"]["pawn8"]["masquerading_as"]
-		self.white_rook1_masquerading_as = game["white"]["rook1"]["masquerading_as"]
-		self.white_rook2_masquerading_as = game["white"]["rook2"]["masquerading_as"]
-		self.white_bishop1_masquerading_as = game["white"]["bishop1"]["masquerading_as"]
-		self.white_bishop2_masquerading_as = game["white"]["bishop2"]["masquerading_as"]
-		self.white_knight1_masquerading_as = game["white"]["knight1"]["masquerading_as"]
-		self.white_knight2_masquerading_as = game["white"]["knight2"]["masquerading_as"]
-		self.white_queen_masquerading_as = game["white"]["queen"]["masquerading_as"]
-		self.white_king_masquerading_as = game["white"]["king"]["masquerading_as"]
-	end
+    # only update masquerade types if masquerade types were sent
+    if game["white"]["pawn1"]["masquerading_as"]
+      self.white_pawn1_masquerading_as = game["white"]["pawn1"]["masquerading_as"]
+      self.white_pawn2_masquerading_as = game["white"]["pawn2"]["masquerading_as"]
+      self.white_pawn3_masquerading_as = game["white"]["pawn3"]["masquerading_as"]
+      self.white_pawn4_masquerading_as = game["white"]["pawn4"]["masquerading_as"]
+      self.white_pawn5_masquerading_as = game["white"]["pawn5"]["masquerading_as"]
+      self.white_pawn6_masquerading_as = game["white"]["pawn6"]["masquerading_as"]
+      self.white_pawn7_masquerading_as = game["white"]["pawn7"]["masquerading_as"]
+      self.white_pawn8_masquerading_as = game["white"]["pawn8"]["masquerading_as"]
+      self.white_rook1_masquerading_as = game["white"]["rook1"]["masquerading_as"]
+      self.white_rook2_masquerading_as = game["white"]["rook2"]["masquerading_as"]
+      self.white_bishop1_masquerading_as = game["white"]["bishop1"]["masquerading_as"]
+      self.white_bishop2_masquerading_as = game["white"]["bishop2"]["masquerading_as"]
+      self.white_knight1_masquerading_as = game["white"]["knight1"]["masquerading_as"]
+      self.white_knight2_masquerading_as = game["white"]["knight2"]["masquerading_as"]
+      self.white_queen_masquerading_as = game["white"]["queen"]["masquerading_as"]
+      self.white_king_masquerading_as = game["white"]["king"]["masquerading_as"]
+    end
 
     self.black_pawn1_x = game["black"]["pawn1"]["x"]
     self.black_pawn2_x = game["black"]["pawn2"]["x"]
@@ -205,6 +211,7 @@ class Game < ActiveRecord::Base
     self.save!
   end
 
+  # get each peice relative to its position, used by debug console
   def pieces_by_positions
     pieces = {
       0 => { },
@@ -254,11 +261,13 @@ class Game < ActiveRecord::Base
     pieces
   end
 
+  # move has been made, change player
   def change_player
     self.current_player = (self.current_player == "white" ? "black" : "white")
     self.save!
   end
 
+  # player resigned, quit game
   def resign(player_id)
     self.game_in_progress = false
     self.current_player = nil
@@ -270,6 +279,7 @@ class Game < ActiveRecord::Base
     self.save!
   end
   
+  # conver the current game to a json object
   def to_json(player_id)
     {
      game_in_progress: self.game_in_progress,
