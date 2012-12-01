@@ -277,7 +277,7 @@ class Game < ActiveRecord::Base
      is_current_players_turn: ((player_id == self.white_player && current_player == "white") || (player_id != self.white_player && current_player == "black") ? true : false),
      is_game_over: (self.white_king_x == -1 || self.black_king_x == -1 ? true : false),
      current_player: self.current_player,
-     winner: (self.white_king_x == nil ? "black" : "white"),
+     winner: (self.white_king_x == -1 ? "black" : "white"),
      game_state: {
                   white: {
                           in_check: self.white_in_check,
