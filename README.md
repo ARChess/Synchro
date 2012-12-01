@@ -38,3 +38,8 @@ Deploying
 
     git remote add heroku git@heroku.com:synchro-archess.git
     git push heroku master
+
+## Credits
+
+* Heroku for providing Hosting
+* New Relic for providing debug logging 
