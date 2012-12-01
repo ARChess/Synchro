@@ -3,6 +3,7 @@ require 'json'
 
 module Api
   class GameApi < Sinatra::Base
+    # request must have api key in order to work, prevents bots from spamming server
     before do
       begin
         api_key = nil
@@ -23,14 +24,17 @@ module Api
       end
     end
     
+    #resful api, get a single game
     get '/' do
       Game.find_game(params["identifier"]).to_json(params["identifier"])
     end
 
+    #restful api, create a single game
     post '/' do
       Game.create_game(params["identifier"]).to_json(params["identifier"])
     end
 
+    #restful api, update a single game
     put '/' do
       request.body.rewind
       body = request.body.read
@@ -42,6 +46,7 @@ module Api
       { success: true }.to_json
     end
 
+    #restful api, delete a single game
     delete '/' do
       game = Game.find_game(params["identifier"])
       game.resign(params["identifier"])
